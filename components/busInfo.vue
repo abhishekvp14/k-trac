@@ -1,18 +1,26 @@
 <template>
-  <div @click="searchBus" class="box flex  items-center w-9/10 h-20 mx-4 my-2 border-solid-black rounded-lg border-2 border-solid border-gray-400">
+  <div @click="searchBus" class="box flex  items-center w-9/10 h-20 mx-4 my-2 border-solid-black rounded-lg border-2 border-solid border-gray-400 font-semibold">
     <div class="id w-1/3 text-center">
       {{ id }}
     </div>
+      <div class="dest w-1/3 items-center justify-around">
+        <div class="station text-center flex justify-around">
+        <div class="from">
+          {{ from }}
+        </div>
+        <div class="arr w-6">
+          <img src="../static/arrow-right.png" class="h-6 w-6">
+        </div>
+        <div class="to">
+          {{ to }}
+        </div>
+      </div>
+      <div v-if='via' class="via text-center text-xs">
+        {{ via }}
+      </div>
+      </div>
     <div class="time w-1/3 text-center">
       {{ time }}
-    </div>
-    <div class="station w-1/3 text-center">
-      <div class="from">
-        {{ from }}
-      </div>
-      <div class="to">
-        {{ to }}
-      </div>
     </div>
   </div>
 </template>
@@ -33,6 +41,10 @@ export default {
       default: null
     },
     to: {
+      type: String,
+      default: null
+    },
+    via: {
       type: String,
       default: null
     }

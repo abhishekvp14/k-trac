@@ -13,7 +13,7 @@ const props = {
   },
   waypoints: {
     type: Array,
-    required: true
+    required: false
   },
   router: {
     type: IRouter
@@ -104,6 +104,18 @@ export default {
         showAlternatives
       } = this
 
+      const customIcon = {
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/4565/4565023.png'
+      }
+      const myIcon = L.icon(customIcon)
+      const iconOptions = {
+        title: 'Bus',
+        draggable: false,
+        icon: myIcon
+      }
+
+      const marker = new L.Marker(waypoints[0], iconOptions)
+      marker.addTo(this.mapObject)
       const options = {
         waypoints,
         fitSelectedRoutes,
@@ -112,7 +124,8 @@ export default {
         routeDragInterval,
         waypointMode,
         useZoomParameter,
-        showAlternatives
+        showAlternatives,
+        marker
       }
 
       const routingLayer = L.Routing.control(options)

@@ -28,7 +28,7 @@ export default {
     return {
       mapId: 'map',
       mapObject: null,
-      zoom: 18,
+      zoom: 12,
       center: { lat: 11.832701833672104, lng: 75.96947366715244 },
       osmUrl: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:
