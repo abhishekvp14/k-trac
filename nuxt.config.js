@@ -62,9 +62,6 @@ export default {
         }
       }
     ],
-    ['nuxt-gmaps', {
-      key: 'AIzaSyA-S5f2jOqGnRy36qSp4NNJsYH7_stfcnA'
-    }],
     'nuxt-leaflet',
     ['nuxt-leaflet', {}],
   ],

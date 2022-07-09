@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitSearch">
-    <div class="form flex flex-col justify-center items-center">
+    <div class="form flex flex-wrap flex-col justify-center items-center">
       <input v-model="from" type="text" class="text bg-gray-100 h-50 w-4/5 p-4 mb-9 mt-12" placeholder="from">
       <input v-model="to" type="text" class="text bg-gray-100 h-50 w-4/5 p-4" placeholder="to">
       <button type="submit(from,to)" class="bg-green-500 mt-8 mb-4 h-12 w-2/5 text-white">

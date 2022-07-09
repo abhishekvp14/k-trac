@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center w-100% items-center h-screen w-screen place-items-center bg-red-500">
-    <div class="form bg-white h-3/5 w-3/4 p-6 text-center search-box">
+    <div class="form bg-white h-3/5 w-3/4 p-6 text-center search-box xm:overflow-y-scroll scrollbar-thin">
       <KtracLogo class="mt-3 logo" />
       <SearchForm class="mt-3 form animate__animated animate__fadeIn" />
       <div class="admin-page mt-4 animate__animated animate__fadeIn">
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import 'tailwind-scrollbar'
 import 'animate.css'
 import KtracLogo from '../components/KtracLogo.vue'
 import SearchForm from '../components/SearchForm.vue'
@@ -58,4 +59,31 @@ export default {
       transform: translateY(0)
     }
   }
+  @media (max-width: 640px) {
+    .search-box{
+      overflow-y: scroll;
+    }
+  }
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 10px;
+}
 </style>
