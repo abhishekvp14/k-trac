@@ -4,10 +4,10 @@
       <KtracLogo />
     </div>
     <div class="title flex mb-4 font-bold">
-      <div class="busNo w-1/3 text-center">
+      <div class="busNo w-1/4 text-center">
       BUSNO
       </div>
-      <div class="dest w-1/3 items-center justify-around">
+      <div class="dest w-1/2 items-center justify-around">
         <div class="station text-center justify-around flex">
           <div class="from">
             FROM
@@ -20,7 +20,7 @@
           (via)
         </div>
       </div>
-    <div class="time w-1/3 text-center">
+    <div class="time w-1/4 text-center">
       TIME
     </div>
      </div>
@@ -64,8 +64,6 @@ export default {
       console.log(startStop.from)
     })
     this.busses = []
-    const text = 'Hello'
-    text.toLowerCase()
     await this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
       querySnapShot.forEach((doc) => {
         // eslint-disable-next-line prefer-const
