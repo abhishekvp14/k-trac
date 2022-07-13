@@ -14,7 +14,7 @@ export default {
       user: ''
     }
   },
-  mounted () {
+  created () {
     this.$fire.auth.onAuthStateChanged((user) => {
       if (user) {
         console.log(user)
