@@ -2,8 +2,8 @@
   <div id="map" style="height: 100vh; width: 100%;">
     <client-only>
       <map :zoom=15 :center="[11.832691332818312, 75.96947366712608]">
-        <!-- <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-        <l-marker :lat-lng="[11.832691332818312, 75.96947366712608]">Hello</l-marker> -->
+        <!-- <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer> -->
+        <!-- <l-marker :lat-lng="[11.832691332818312, 75.96947366712608]">Hello</l-marker> -->
         <LRoutingMachine :mapObject="mapObject" :waypoints="waypoints" />
       </map>
     </client-only>
@@ -30,9 +30,9 @@ export default {
       mapObject: null,
       zoom: 12,
       center: { lat: 11.832701833672104, lng: 75.96947366715244 },
-      osmUrl: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      osmUrl: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        '<a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
       waypoints
     }
   },

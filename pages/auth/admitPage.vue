@@ -16,8 +16,12 @@ export default {
   },
   mounted () {
     this.$fire.auth.onAuthStateChanged((user) => {
-      console.log(user)
-      this.user = user
+      if (user) {
+        console.log(user)
+        this.user = user
+      } else {
+        this.$router.push('/auth/SignIn')
+      }
     })
   },
   methods: {

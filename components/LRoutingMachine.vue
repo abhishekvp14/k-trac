@@ -13,7 +13,7 @@ const props = {
   },
   waypoints: {
     type: Array,
-    required: false
+    required: true
   },
   router: {
     type: IRouter
@@ -52,7 +52,7 @@ const props = {
   },
   useZoomParameter: {
     type: Boolean,
-    default: false
+    default: true
   },
   showAlternatives: {
     type: Boolean,
@@ -70,7 +70,18 @@ export default {
     return {
       ready: false,
       map: null,
-      layer: null
+      layer: null,
+      marker: null
+      // createMarker: function marker (i, waypoint, n) {
+      //   const marker = L.marker(waypoint[0], {
+      //     draggable: false,
+      //     icon: L.icon({
+      //       iconUrl: 'https://cdn-icons-png.flaticon.com/512/4565/4565023.png',
+      //       iconSize: [30, 30]
+      //     })
+      //   })
+      //   return marker
+      // }
     }
   },
   watch: {
@@ -88,11 +99,30 @@ export default {
     return this.layer ? this.layer.remove() : null
   },
   methods: {
+    createMarker (waypoint) {
+      // eslint-disable-next-line no-unused-vars
+      const marker1 = L.marker(waypoint[0], {
+        draggable: false,
+        icon: L.icon({
+          iconUrl: 'https://cdn-icons-png.flaticon.com/512/4565/4565023.png',
+          iconSize: [30, 30]
+        })
+      })
+      // eslint-disable-next-line no-unused-vars
+      const marker2 = L.marker(waypoint[1], {
+        draggable: false,
+        icon: L.icon({
+          iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+          iconSize: [30, 30]
+        })
+      })
+      return { marker1, marker2 }
+    },
     add () {
       if (this.mapObject == null) {
         return
       }
-
+      // console.log('hi')
       const {
         waypoints,
         fitSelectedRoutes,
@@ -101,21 +131,22 @@ export default {
         routeDragInterval,
         waypointMode,
         useZoomParameter,
-        showAlternatives
+        showAlternatives,
+        marker
       } = this
+      // console.log(marker)
+      // const customIcon = {
+      //   iconUrl: 'https://cdn-icons-png.flaticon.com/512/4565/4565023.png'
+      // }
+      // const myIcon = L.icon(customIcon)
+      // const iconOptions = {
+      //   title: 'Bus',
+      //   draggable: false,
+      //   icon: myIcon
+      // }
 
-      const customIcon = {
-        iconUrl: 'https://cdn-icons-png.flaticon.com/512/4565/4565023.png'
-      }
-      const myIcon = L.icon(customIcon)
-      const iconOptions = {
-        title: 'Bus',
-        draggable: false,
-        icon: myIcon
-      }
-
-      const marker = new L.Marker(waypoints[0], iconOptions)
-      marker.addTo(this.mapObject)
+      // const marker = new L.Marker(waypoints[0], iconOptions)
+      // marker.addTo(this.mapObject)
       const options = {
         waypoints,
         fitSelectedRoutes,
@@ -127,6 +158,10 @@ export default {
         showAlternatives,
         marker
       }
+
+      // this.mapObject.removeMarker()
+      options.marker = this.createMarker(waypoints).marker1.addTo(this.mapObject)
+      options.marker = this.createMarker(waypoints).marker2.addTo(this.mapObject)
 
       const routingLayer = L.Routing.control(options)
       routingLayer.addTo(this.mapObject)
