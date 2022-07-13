@@ -56,6 +56,16 @@ export default {
       this.validatePassword(value)
     }
   },
+  mounted () {
+    this.$fire.auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user)
+        this.user = user
+      } else {
+        this.$router.push('/auth/SignIn')
+      }
+    })
+  },
   methods: {
     async SignUp (email, password) {
       email = this.email

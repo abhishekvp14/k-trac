@@ -18,6 +18,9 @@ export default {
       password: ''
     }
   },
+  mounted () {
+    
+  },
   methods: {
     signUp (email, password) {
     }

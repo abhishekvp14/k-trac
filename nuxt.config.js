@@ -56,7 +56,9 @@ export default {
           appId: "1:784249830896:web:56a7c269beed83ec78f135",
         },
         services: {
-          auth: true,
+          auth: {
+            persistance: 'session'
+          },
           database: true,
           firestore: true
         }

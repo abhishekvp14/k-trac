@@ -9,14 +9,11 @@
         <input v-model='password'
         type='password'
           placeholder='Enter password'
-          class="text bg-gray-100 h-50 w-4/5 p-4 mt-1 mb-1"
+          class="text bg-gray-100 h-50 w-4/5 p-4 mt-1 mb-6"
           :style='{border: pBorderStyle}'><br>
         <span v-if='passwordError'>{{ passwordError }}</span><br>
         <button type='submit' :disabled='!buttonDisable' class="text-xm text-white font-bold bg-green-500 px-2 py-1 rounded-xl h-10 w-32">Sign In</button>
       </form>
-      <div class="sign-up mt-5 text-gray-600 font-bold">
-        <nuxt-link to="./SignUp">New admin? Sign Up</nuxt-link>
-      </div>
     </div>
   </div>
 </template>
@@ -57,7 +54,6 @@ export default {
       await signInWithEmailAndPassword(auth, email, password).then((currentUser) => {
         const user = currentUser.user
         console.log(user)
-        alert('Signed In')
         this.$router.push('/auth/admitPage')
       }).catch((err) => {
         if (err.code === 'auth/wrong-password') {

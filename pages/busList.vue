@@ -74,18 +74,15 @@ export default {
           via: '',
           time: ''
         }
-        console.log(doc.data())
         const route = doc.data().route.toUpperCase()
         data.id = doc.id
         this.$fire.firestore.collection('RouteList').doc(route).get().then((querySnapShot) => {
-          console.log(querySnapShot.data())
           data.from = querySnapShot.data().from.toUpperCase()
           data.to = querySnapShot.data().to.toUpperCase()
           data.time = querySnapShot.data().time
           data.via = querySnapShot.data().via
         })
         this.busses.push(data)
-        console.log(data)
       })
     })
   },

@@ -28,7 +28,16 @@ export default {
       route: ''
     }
   },
-
+  mounted () {
+    this.$fire.auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user)
+        this.user = user
+      } else {
+        this.$router.push('/auth/SignIn')
+      }
+    })
+  },
   methods: {
     async postData (busno, regno, route) {
       try {

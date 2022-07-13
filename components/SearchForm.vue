@@ -1,22 +1,26 @@
 <template>
   <form @submit.prevent="submitSearch">
     <div class="form flex flex-wrap flex-col justify-center items-center">
-      <input v-model="from" type="text" class="text bg-gray-100 h-50 w-4/5 p-4 mb-9 mt-12" placeholder="from">
-      <input v-model="to" type="text" class="text bg-gray-100 h-50 w-4/5 p-4" placeholder="to">
-      <button type="submit(from,to)" class="bg-green-500 mt-8 mb-4 h-12 w-2/5 text-white">
+      <!-- <input v-model="from" type="text" class="text bg-gray-100 h-50 w-4/5 p-4 mb-9 mt-12" placeholder="from" required> -->
+      <Multiselect v-model="from" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-6 mt-6" placeholder="from"></Multiselect>
+      <!-- <input v-model="to" type="text" class="text bg-gray-100 h-50 w-4/5 p-4" placeholder="to" required> -->
+      <Multiselect v-model="to" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-4 mt-6" placeholder="to"></Multiselect>
+        <button type="submit(from,to)" class="bg-green-500 mt-8 mb-4 h-12 w-2/5 text-white">
         Search
       </button>
     </div>
   </form>
 </template>
 <script>
+import Multiselect from 'vue-multiselect'
 import { bus } from '../plugins/EventBus'
 export default {
-  css: ['animate.css/animate.min.css'],
+  css: ['animate.css/animate.min.css', 'vue-multiselect/dist/vue-multiselect.min.css'],
   data () {
     return {
       from: '',
-      to: ''
+      to: '',
+      options: ['Kannur', 'Malapuram', 'Wayanad', 'Trivandrum', 'Kochi', 'Thalapuzha', 'Thavinjal', 'Chungam']
     }
   },
   methods: {
@@ -33,11 +37,21 @@ export default {
       }
       return stops
     }
-  }
+  },
+  components: { Multiselect }
 }
 </script>
-<style lang="css" scoped>
-form{
-    animation-delay: 0.6s;
+<style>
+.text{
+  width: 90%;
+}
+.multiselect__tags .multiselect__input{
+  background-color: gray.100;
+  width: 90%;
+}
+.multiselect__tags{
+  border: 2px solid gray.100;
+  height: 50px;
+  background-color: gray.100;
 }
 </style>
