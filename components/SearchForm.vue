@@ -13,22 +13,35 @@
 </template>
 <script>
 import Multiselect from 'vue-multiselect'
-import { bus } from '../plugins/EventBus'
+// import { bus } from '../plugins/EventBus'
 export default {
   css: ['animate.css/animate.min.css', 'vue-multiselect/dist/vue-multiselect.min.css'],
   data () {
     return {
       from: '',
       to: '',
-      options: ['Kannur', 'Malapuram', 'Wayanad', 'Trivandrum', 'Kochi', 'Thalapuzha', 'Thavinjal', 'Chungam']
+      // options: ['Kannur', 'Malapuram', 'Wayanad', 'Trivandrum', 'Kochi', 'Thalapuzha', 'Thavinjal', 'Chungam']
+      options: [],
+      routes: []
     }
+  },
+  async created () {
+    await this.$fire.firestore.collection('RouteList').get().then((routes) => {
+      routes.forEach((route) => {
+        const iStops = route.data().intStops
+        Array.prototype.push.apply(this.routes, iStops)
+        this.options = [...new Set(this.routes)]
+      })
+    })
   },
   methods: {
     submitSearch (from, to) {
       from = this.from
       to = this.to
-      bus.$emit('addressPush', { from, to })
-      this.$router.push('/busList')
+      console.log(from)
+      console.log(to)
+      // bus.$emit('addressPush', { from, to })
+      this.$router.push({ path: '/BusList', params: { data: { from, to } } })
     },
     getStops () {
       const stops = {
@@ -44,6 +57,12 @@ export default {
 <style>
 .text{
   width: 90%;
+  height: 50px;
+  display:  flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  /* background-color: red; */
 }
 .multiselect__tags .multiselect__input{
   background-color: gray.100;

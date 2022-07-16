@@ -24,19 +24,21 @@
       TIME
     </div>
      </div>
-    <div class="list ">
+    <div class="list " v-if="busses">
       <ul>
         <li v-for="(bus, index) in busses" :key="index" class="animate__animated animate__fadeInUp">
           <BusInfo v-bind="bus" />
         </li>
       </ul>
     </div>
+    <div v-else class="no-res font-bold text-lg center text-red-500 flex justify-center items-center mt-8">
+      No Busses found
+    </div>
   </div>
 </template>
 
 <script>
 import 'animate.css'
-import { bus } from '../plugins/EventBus'
 import BusInfo from '~/components/busInfo.vue'
 import KtracLogo from '~/components/KtracLogo.vue'
 export default {
@@ -49,6 +51,7 @@ export default {
       busses: [],
       from: '',
       to: '',
+      stops: [],
       data: {
         id: '',
         from: '',
@@ -56,33 +59,38 @@ export default {
         via: '',
         route: '',
         time: ''
-      }
+      },
+      query: {}
     }
   },
   async created () {
-    bus.$on('addressPush', (startStop) => {
-      console.log(startStop.from)
-    })
-    this.busses = []
-    await this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
+    console.log(this.$route.params.data)
+    await this.$fire.firestore.collection('RouteList').get().then((querySnapShot) => {
       querySnapShot.forEach((doc) => {
         // eslint-disable-next-line prefer-const
-        let data = {
+        // console.log(doc.data().intStops)
+        const data = {
           id: '',
           from: '',
           to: '',
           via: '',
           time: ''
         }
-        const route = doc.data().route.toUpperCase()
-        data.id = doc.id
-        this.$fire.firestore.collection('RouteList').doc(route).get().then((querySnapShot) => {
-          data.from = querySnapShot.data().from.toUpperCase()
-          data.to = querySnapShot.data().to.toUpperCase()
-          data.time = querySnapShot.data().time
-          data.via = querySnapShot.data().via
+        const route = doc.id
+        // console.log(route)
+        this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
+          querySnapShot.forEach((bus) => {
+            if (bus.data().route === route) {
+              data.id = bus.id
+              data.from = doc.data().from
+              data.to = doc.data().to
+              data.time = doc.data().time
+              data.via = doc.data().via
+            }
+          })
         })
         this.busses.push(data)
+        console.log(data)
       })
     })
   },
