@@ -50,7 +50,7 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: process.env.F_API,
+          apiKey: "AIzaSyBGXBYwIcdvd1rNsvMC5XZC1xIQjvy9JSU",
           authDomain: "k-trac.firebaseapp.com",
           projectId: "k-trac",
           storageBucket: "k-trac.appspot.com",
