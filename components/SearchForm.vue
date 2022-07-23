@@ -13,7 +13,7 @@
 </template>
 <script>
 import Multiselect from 'vue-multiselect'
-// import { bus } from '../plugins/EventBus'
+import { bus } from '~/plugins/EventBus'
 export default {
   css: ['animate.css/animate.min.css', 'vue-multiselect/dist/vue-multiselect.min.css'],
   data () {
@@ -22,7 +22,8 @@ export default {
       to: '',
       // options: ['Kannur', 'Malapuram', 'Wayanad', 'Trivandrum', 'Kochi', 'Thalapuzha', 'Thavinjal', 'Chungam']
       options: [],
-      routes: []
+      routes: [],
+      data: {}
     }
   },
   async created () {
@@ -38,10 +39,10 @@ export default {
     submitSearch (from, to) {
       from = this.from
       to = this.to
-      console.log(from)
-      console.log(to)
-      // bus.$emit('addressPush', { from, to })
-      this.$router.push({ path: '/BusList', params: { data: { from, to } } })
+      // console.log(from)
+      // console.log(to)
+      bus.$emit('addressPush', { from, to })
+      this.$router.push(`/busList?from=${this.from}&to=${this.to}`)
     },
     getStops () {
       const stops = {

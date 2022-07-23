@@ -8,7 +8,7 @@
         <div class="from">
           {{ from }}
         </div>
-        <div class="via-loc flex flex-col items-center justify-center">
+        <div class="via-loc flex flex-col items-center justify-center w-20">
           <div class="arr w-6">
           <img src="../static/arrow-right.png" class="h-6 w-6">
         </div>

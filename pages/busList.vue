@@ -24,7 +24,7 @@
       TIME
     </div>
      </div>
-    <div class="list " v-if="busses">
+    <div class="list " v-if="available">
       <ul>
         <li v-for="(bus, index) in busses" :key="index" class="animate__animated animate__fadeInUp">
           <BusInfo v-bind="bus" />
@@ -39,8 +39,9 @@
 
 <script>
 import 'animate.css'
-import BusInfo from '~/components/busInfo.vue'
 import KtracLogo from '~/components/KtracLogo.vue'
+import BusInfo from '~/components/busInfo.vue'
+// import { bus } from '~/plugins/EventBus'
 export default {
   name: 'busList',
   css: ['animate.css'],
@@ -60,11 +61,11 @@ export default {
         route: '',
         time: ''
       },
-      query: {}
+      query: []
     }
   },
   async created () {
-    console.log(this.$route.params.data)
+    this.query.push(this.$route.query.from, this.$route.query.to)
     await this.$fire.firestore.collection('RouteList').get().then((querySnapShot) => {
       querySnapShot.forEach((doc) => {
         // eslint-disable-next-line prefer-const
@@ -76,43 +77,55 @@ export default {
           via: '',
           time: ''
         }
-        const route = doc.id
+        if (this.query.every(stop => doc.data().intStops.includes(stop))) {
+          if (doc.data().intStops.indexOf(this.query[1]) - doc.data().intStops.indexOf(this.query[0]) > 0) {
+            console.log(0)
+            const route = doc.id
+            this.getBusses(doc, data, route)
+          }
         // console.log(route)
-        this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
-          querySnapShot.forEach((bus) => {
-            if (bus.data().route === route) {
-              data.id = bus.id
-              data.from = doc.data().from
-              data.to = doc.data().to
-              data.time = doc.data().time
-              data.via = doc.data().via
-            }
-          })
-        })
-        this.busses.push(data)
-        console.log(data)
+        // console.log(data)
+        }
       })
     })
   },
+  mounted () {
+  },
   methods: {
-    async getData () {
-      this.busses = []
-      await this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
-        querySnapShot.forEach((doc) => {
-          this.busses.push({
-            id: doc.id,
-            bustype: doc.data().bustype,
-            from: doc.data().from,
-            route: doc.data().route,
-            time: doc.data().time,
-            to: doc.data().to
-          })
+    getBusses (doc, data, route) {
+      this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
+        querySnapShot.forEach((bus) => {
+          if (bus.data().route === route) {
+            data.id = bus.id
+            data.from = doc.data().from
+            data.to = doc.data().to
+            data.time = doc.data().time
+            data.via = doc.data().via
+            this.busses.push(data)
+          }
         })
       })
+    },
+    setStops (from, to) {
+      this.from = from
+      this.to = to
+    },
+    available () {
+      if (this.busses.length === 0) {
+        return true
+      } else {
+        return false
+      }
     }
-
   }
 }
 </script>
 <style lang="css" scoped>
 </style>
+
+<!-- let haystack = ["12345", "hello", "world"];
+let needle = ["hello", "12345"];
+
+let result = needle.every(i => haystack.includes(i));
+
+console.log(result); // Output = true -->
