@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     searchBus () {
-      this.$router.push('/mapView')
+      this.$router.push(`/mapView?from=${this.$route.query.from}&to=${this.$route.query.to}`)
     }
   }
 }

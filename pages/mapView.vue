@@ -15,11 +15,6 @@ import L from 'leaflet'
 import LRoutingMachine from '../components/LRoutingMachine.vue'
 import 'leaflet/dist/leaflet.css'
 
-const waypoints = [
-  { lat: 11.832701833672104, lng: 75.96947366715244 },
-  { lat: 11.82073094508727, lng: 75.98326803596473 }
-]
-
 export default {
   components: {
     LRoutingMachine
@@ -28,15 +23,27 @@ export default {
     return {
       mapId: 'map',
       mapObject: null,
-      zoom: 12,
-      center: { lat: 11.832701833672104, lng: 75.96947366715244 },
+      zoom: 13,
+      center: {},
       osmUrl: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:
         '<a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-      waypoints
+      waypoints: []
     }
   },
-  mounted () {
+  async created () {
+    const from = this.$route.query.from
+    const to = this.$route.query.to
+    let mapPoints = await this.$axios.$get(`https://nominatim.openstreetmap.org/search?q=${from}+kerala&format=json&polygon=1%addressdetails=1`)
+    console.log(mapPoints[0])
+    let lt = mapPoints[0].lat
+    let ln = mapPoints[0].lon
+    this.center = { lat: lt, lng: ln }
+    this.waypoints.push({ lat: lt, lng: ln })
+    mapPoints = await this.$axios.$get(`https://nominatim.openstreetmap.org/search?q=${to}+kerala&format=json&polygon=1%addressdetails=1`)
+    lt = mapPoints[0].lat
+    ln = mapPoints[0].lon
+    this.waypoints.push({ lat: lt, lng: ln })
     this.mapObject = L.map(this.mapId, {
       zoom: this.zoom,
       center: this.center

@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -29,6 +30,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
@@ -48,7 +50,7 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: "AIzaSyBGXBYwIcdvd1rNsvMC5XZC1xIQjvy9JSU",
+          apiKey: process.env.F_API,
           authDomain: "k-trac.firebaseapp.com",
           projectId: "k-trac",
           storageBucket: "k-trac.appspot.com",
