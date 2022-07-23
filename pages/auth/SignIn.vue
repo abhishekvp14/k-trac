@@ -1,5 +1,6 @@
 <template>
   <div  class='flex flex-col justify-center w-100% items-center h-screen w-screen place-items-center bg-red-500'>
+    <PopUp v-if="signedIn" msg="Signed in!" />
     <div class="form bg-white h-3/5 w-3/4 p-6 text-center search-box rounded-2xl">
       <KtracLogo />
       <h1 class="text-2xl text-gray-600 font-bold mt-8 mb-1">Sign In</h1>
@@ -20,6 +21,7 @@
 
 <script>
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import PopUp from '../../components/PopUp.vue'
 import KtracLogo from '~/components/KtracLogo.vue'
 export default {
   data () {
@@ -33,7 +35,8 @@ export default {
       pBorderStyle: '',
       buttonDisable: false,
       eDisabled: false,
-      pDisabled: false
+      pDisabled: false,
+      signedIn: false
     }
   },
   watch: {
@@ -54,7 +57,10 @@ export default {
       await signInWithEmailAndPassword(auth, email, password).then((currentUser) => {
         const user = currentUser.user
         console.log(user)
-        this.$router.push('/auth/admitPage')
+        this.signedIn = true
+        setTimeout(() => {
+          this.$router.push('/auth/admitPage')
+        }, 1700)
       }).catch((err) => {
         if (err.code === 'auth/wrong-password') {
           alert('Wrong password')
@@ -85,14 +91,14 @@ export default {
         this.pDisabled = true
         this.buttonDisable = this.eDisabled && this.pDisabled
       } else {
-        this.passwordError = 'Password needs to be at least 8 letters'
+        this.passwordError = 'Password needs to be at least 6 letters'
         this.pDisabled = false
         this.buttonDisable = this.eDisabled && this.pDisabled
         this.pBorderStyle = '2px solid red'
       }
     }
   },
-  components: { KtracLogo }
+  components: { KtracLogo, PopUp }
 }
 </script>
 <style lang='css' scoped>

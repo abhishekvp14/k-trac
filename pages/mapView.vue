@@ -1,7 +1,7 @@
 <template>
   <div id="map" style="height: 100vh; width: 100%;">
     <client-only>
-      <map :zoom=15 :center="[11.832691332818312, 75.96947366712608]">
+      <map :zoom=15 :center="center">
         <!-- <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer> -->
         <!-- <l-marker :lat-lng="[11.832691332818312, 75.96947366712608]">Hello</l-marker> -->
         <LRoutingMachine :mapObject="mapObject" :waypoints="waypoints" />

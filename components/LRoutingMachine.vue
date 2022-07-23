@@ -109,14 +109,14 @@ export default {
         })
       })
       // eslint-disable-next-line no-unused-vars
-      const marker2 = L.marker(waypoint[1], {
-        draggable: false,
-        icon: L.icon({
-          iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-          iconSize: [30, 30]
-        })
-      })
-      return { marker1, marker2 }
+      // const marker2 = L.marker(waypoint[1], {
+      //   draggable: false,
+      //   icon: L.icon({
+      //     iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+      //     iconSize: [30, 30]
+      //   })
+      // })
+      return { marker1 }
     },
     add () {
       if (this.mapObject == null) {
@@ -161,7 +161,7 @@ export default {
 
       // this.mapObject.removeMarker()
       options.marker = this.createMarker(waypoints).marker1.addTo(this.mapObject)
-      options.marker = this.createMarker(waypoints).marker2.addTo(this.mapObject)
+      // options.marker = this.createMarker(waypoints).marker2.addTo(this.mapObject)
 
       const routingLayer = L.Routing.control(options)
       routingLayer.addTo(this.mapObject)
@@ -172,5 +172,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
+.leaflet-routing-collapse-btn, .leaflet-routing-container, .leaflet-bar, .leaflet-routing-collapsible, .leaflet-control {
+  opacity: 0!important;
+}
+.leaflet-marker-icon, .leaflet-zoom-animated, .leaflet-interactive, .leaflet-marker-draggable {
+  pointer-events: none!important;;
+}
 </style>

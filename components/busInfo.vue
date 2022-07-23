@@ -1,5 +1,5 @@
 <template>
-  <div class="box flex  items-center w-9/10 h-20 mx-4 my-2 border-solid-black rounded-lg border-2 border-solid border-gray-400 font-semibold" @click="searchBus">
+  <div class="box flex  items-center w-9/10 h-20 mx-4 my-2 border-solid-black rounded-lg border-2 border-solid border-gray-400 font-semibold cursor-pointer" @click="searchBus">
     <div class="id w-1/4 text-center">
       {{ id }}
     </div>

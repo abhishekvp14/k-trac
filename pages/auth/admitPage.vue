@@ -18,7 +18,7 @@
             Add new route
           </span>
         </div>
-        <div @click="routePage" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="routeUpdate" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/routeUpdate.png" alt="Update bus route">
           <span class="text-xs font-bold">
             Update bus route
@@ -66,8 +66,11 @@ export default {
     routePage () {
       this.$router.push('/routeEntry')
     },
+    routeUpdate () {
+      this.$router.push('/routeUpdate')
+    },
     signInPage () {
-      this.$router.push('/auth/SignIn')
+      this.$router.push('/auth/SignUp')
     }
   },
   components: { KtracLogo }

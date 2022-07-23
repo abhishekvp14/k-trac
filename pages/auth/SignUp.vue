@@ -1,5 +1,6 @@
 <template>
   <div  class='flex flex-col justify-center w-100% items-center h-screen w-screen place-items-center bg-red-500'>
+    <PopUp v-if="added" msg="New admin added" />
     <div class='form bg-white h-3/5 w-3/4 p-6 text-center search-box rounded-2xl'>
       <KtracLogo />
       <h1 class="text-2xl text-gray-600 font-bold mt-8 mb-1">Sign Up</h1>
@@ -31,6 +32,7 @@
 <script>
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import KtracLogo from '~/components/KtracLogo.vue'
+import PopUp from '~/components/PopUp.vue'
 export default {
   data () {
     return {
@@ -43,7 +45,8 @@ export default {
       pBorderStyle: '',
       buttonDisable: false,
       eDisabled: false,
-      pDisabled: false
+      pDisabled: false,
+      added: false
     }
   },
   watch: {
@@ -74,7 +77,10 @@ export default {
       await createUserWithEmailAndPassword(auth, email, password).then((currentUser) => {
         const user = currentUser.user
         console.log(user)
-        alert('Signed In')
+        this.added = true
+        setTimeout(() => {
+          this.added = false
+        }, 1700)
       }).catch((err) => {
         console.log(err)
       })
@@ -109,7 +115,7 @@ export default {
       }
     }
   },
-  components: { KtracLogo }
+  components: { KtracLogo, PopUp }
 }
 </script>
 <style lang='css' scoped>
