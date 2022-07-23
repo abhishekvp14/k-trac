@@ -2,10 +2,10 @@
   <form @submit.prevent="submitSearch">
     <div class="form flex flex-wrap flex-col justify-center items-center">
       <!-- <input v-model="from" type="text" class="text bg-gray-100 h-50 w-4/5 p-4 mb-9 mt-12" placeholder="from" required> -->
-      <Multiselect v-model="from" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-6 mt-6" placeholder="from"></Multiselect>
+      <Multiselect v-model="from" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-6 mt-6" placeholder="from" />
       <!-- <input v-model="to" type="text" class="text bg-gray-100 h-50 w-4/5 p-4" placeholder="to" required> -->
-      <Multiselect v-model="to" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-4 mt-6" placeholder="to"></Multiselect>
-        <button type="submit(from,to)" class="bg-green-500 mt-8 mb-4 h-12 w-2/5 text-white">
+      <Multiselect v-model="to" :options="options" class="text bg-gray-100 h-50 w-4/5 mb-4 mt-6" placeholder="to" />
+      <button type="submit(from,to)" class="bg-green-500 mt-8 mb-4 h-12 w-2/5 text-white">
         Search
       </button>
     </div>
@@ -16,6 +16,7 @@ import Multiselect from 'vue-multiselect'
 import { bus } from '~/plugins/EventBus'
 export default {
   css: ['animate.css/animate.min.css', 'vue-multiselect/dist/vue-multiselect.min.css'],
+  components: { Multiselect },
   data () {
     return {
       from: '',
@@ -51,8 +52,7 @@ export default {
       }
       return stops
     }
-  },
-  components: { Multiselect }
+  }
 }
 </script>
 <style>
@@ -74,4 +74,7 @@ export default {
   height: 50px;
   background-color: gray.100;
 }
+</style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
 </style>

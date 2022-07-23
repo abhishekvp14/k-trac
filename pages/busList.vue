@@ -5,7 +5,7 @@
     </div>
     <div class="title flex mb-4 font-bold">
       <div class="busNo w-1/4 text-center">
-      BUSNO
+        BUSNO
       </div>
       <div class="dest w-1/2 items-center justify-around">
         <div class="station text-center justify-around flex">
@@ -20,11 +20,11 @@
           (via)
         </div>
       </div>
-    <div class="time w-1/4 text-center">
-      TIME
+      <div class="time w-1/4 text-center">
+        TIME
+      </div>
     </div>
-     </div>
-    <div class="list " v-if="available">
+    <div v-if="available" class="list ">
       <ul>
         <li v-for="(bus, index) in busses" :key="index" class="animate__animated animate__fadeInUp">
           <BusInfo v-bind="bus" />
@@ -79,7 +79,6 @@ export default {
         }
         if (this.query.every(stop => doc.data().intStops.includes(stop))) {
           if (doc.data().intStops.indexOf(this.query[1]) - doc.data().intStops.indexOf(this.query[0]) > 0) {
-            console.log(0)
             const route = doc.id
             this.getBusses(doc, data, route)
           }
