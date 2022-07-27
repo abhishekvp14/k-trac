@@ -1,9 +1,9 @@
 <template>
-  <LoadingAnim />
+  <PopUp msg="Testing" />
 </template>
 <script>
-import LoadingAnim from '~/components/loadingAnim.vue'
+import PopUp from '~/components/PopUp.vue'
 export default {
-  components: { LoadingAnim }
+  components: { PopUp }
 }
 </script>
