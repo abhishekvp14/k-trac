@@ -24,6 +24,12 @@
             Update bus route
           </span>
         </div>
+        <div @click="busUpdate" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+          <img src="../../components/images/bus repair.jpg" alt="Update bus status">
+          <span class="text-xs font-bold">
+            Update bus status
+          </span>
+        </div>
         <div @click="signInPage" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/addAdmin.png" alt="Add new admin">
           <span class="text-xs font-bold">
@@ -68,6 +74,9 @@ export default {
     },
     routeUpdate () {
       this.$router.push('/routeUpdate')
+    },
+    busUpdate () {
+      this.$router.push('/busUpdate')
     },
     signInPage () {
       this.$router.push('/auth/SignUp')

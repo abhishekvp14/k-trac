@@ -71,7 +71,8 @@ export default {
       try {
         await this.$fire.firestore.collection('BusList').doc(busno.toUpperCase()).set({
           regno: this.regno.toUpperCase(),
-          route: this.route.toUpperCase() // route number
+          route: this.route.toUpperCase(), // route number
+          isRunning: true
         })
       } catch (err) {
         console.log(err)
