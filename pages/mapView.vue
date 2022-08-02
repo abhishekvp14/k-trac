@@ -41,6 +41,9 @@ export default {
     this.center = { lat: lt, lng: ln }
     this.waypoints.push({ lat: lt, lng: ln })
     mapPoints = await this.$axios.$get(`https://nominatim.openstreetmap.org/search?q=${to}+kerala&format=json&polygon=1%addressdetails=1`)
+    if (to === 'mananthavady') {
+      mapPoints = await this.$axios.$get(`https://nominatim.openstreetmap.org/search?q=${to}+town+kerala&format=json&polygon=1%addressdetails=1`)
+    }
     lt = mapPoints[0].lat
     ln = mapPoints[0].lon
     this.waypoints.push({ lat: lt, lng: ln })

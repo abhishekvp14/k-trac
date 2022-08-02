@@ -24,14 +24,14 @@
         TIME
       </div>
     </div>
-    <div v-if="available" class="list ">
+    <div class="list ">
       <ul>
         <li v-for="(bus, index) in busses" :key="index" class="animate__animated animate__fadeInUp">
           <BusInfo v-bind="bus" />
         </li>
       </ul>
     </div>
-    <div v-else class="no-res font-bold text-lg center text-red-500 flex justify-center items-center mt-8">
+    <div v-if="!available" class="no-res font-bold text-lg center text-red-500 flex justify-center items-center mt-8">
       No Busses found
     </div>
   </div>
@@ -61,10 +61,11 @@ export default {
         route: '',
         time: ''
       },
-      query: []
+      query: [],
+      available: true
     }
   },
-  async created () {
+  async mounted () {
     this.query.push(this.$route.query.from, this.$route.query.to)
     await this.$fire.firestore.collection('RouteList').get().then((querySnapShot) => {
       querySnapShot.forEach((doc) => {
@@ -82,17 +83,14 @@ export default {
             const route = doc.id
             this.getBusses(doc, data, route)
           }
-        // console.log(route)
-        // console.log(data)
         }
       })
     })
   },
-  mounted () {
-  },
   methods: {
-    getBusses (doc, data, route) {
-      this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
+    async getBusses (doc, data, route) {
+      let count = 0
+      await this.$fire.firestore.collection('BusList').get().then((querySnapShot) => {
         querySnapShot.forEach((bus) => {
           if (bus.data().route === route) {
             data.id = bus.id
@@ -101,20 +99,15 @@ export default {
             data.time = doc.data().time
             data.via = doc.data().via
             this.busses.push(data)
+            count = count + 1
           }
         })
       })
+      console.log(count)
     },
     setStops (from, to) {
       this.from = from
       this.to = to
-    },
-    available () {
-      if (this.busses.length === 0) {
-        return true
-      } else {
-        return false
-      }
     }
   }
 }

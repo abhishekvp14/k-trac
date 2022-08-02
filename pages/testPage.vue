@@ -1,9 +1,9 @@
 <template>
-  <AppLoading msg="Testing" />
+  <PopUp msg="Testing" />
 </template>
 <script>
-import AppLoading from '~/components/AppLoading.vue'
+import PopUp from '~/components/PopUp.vue'
 export default {
-  components: { AppLoading }
+  components: { PopUp }
 }
 </script>

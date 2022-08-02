@@ -3,40 +3,40 @@
     <div class="form bg-gray-100 h-3/5 w-4/5 p-6 text-center search-box rounded-2xl">
       <KtracLogo />
       <h1 class="text-2xl text-gray-600 font-bold mt-4 mb-1">Admin Page</h1>
-      <div class="sign-up mt-5 text-gray-600 font-bold">
-      </div>
+      <div class="flex flex-col justify-center items-center h-3/5">
       <div class="actions flex flex-wrap justify-around items-center h-auto">
-        <div @click="busPage" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="busPage" class="button flex flex-col h-20 w-20 m-4 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/addBus.png" alt="Add new bus">
           <span class="text-xs font-bold">
             Add new bus
           </span>
         </div>
-        <div @click="routePage" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="routePage" class="button flex flex-col h-20 w-20 m-4 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/addRoute.png" alt="Add new route">
           <span class="text-xs font-bold">
             Add new route
           </span>
         </div>
-        <div @click="routeUpdate" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="routeUpdate" class="button flex flex-col h-20 w-20 m-4 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/routeUpdate.png" alt="Update bus route">
           <span class="text-xs font-bold">
             Update bus route
           </span>
         </div>
-        <div @click="busUpdate" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="busUpdate" class="button flex flex-col h-20 w-20 m-4 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/bus repair.jpg" alt="Update bus status">
           <span class="text-xs font-bold">
             Update bus status
           </span>
         </div>
-        <div @click="signInPage" class="button flex flex-col h-20 w-20 m-6 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
+        <div @click="signInPage" class="button flex flex-col h-20 w-20 m-4 rounded-md items-center p-2 bg-white shadow-lg cursor-pointer">
           <img src="../../components/images/addAdmin.png" alt="Add new admin">
           <span class="text-xs font-bold">
             Add new admin
           </span>
         </div>
       </div>
+    </div>
         <button @click="signOut" class="bg-red-400 text-white py-1 px-2 mt-3 rounded-md">sign out</button>
     </div>
   </div>

@@ -114,7 +114,7 @@ export default {
           via: this.via.toLowerCase(),
           time: this.time.toUpperCase(),
           intStops: this.intStops.split(' '),
-          type: this.routeType.toUppercase()
+          type: this.routeType.toUpperCase()
         })
       } catch (err) {
         console.log(err)

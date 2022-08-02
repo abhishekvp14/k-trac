@@ -1,7 +1,7 @@
 <template>
   <div>
     <PopUp v-if="added" msg="Route updated" />
-    <form @submit.prevent="postData(routeno,from,to,via,time,intStops)">
+    <form @submit.prevent="postData(routeno,busno)">
       <div class="form flex flex-col justify-center items-center">
         <KtracLogo class="mt-6" />
         <h3 class="my-6 text-3xl">
@@ -42,8 +42,8 @@ export default {
   methods: {
     postData (routeno, busno) {
       try {
-        this.$fire.firestore.collection('BusList').doc(busno).set({
-          route: routeno.toUppercase()
+        this.$fire.firestore.collection('BusList').doc(busno.toUpperCase()).set({
+          route: routeno.toUpperCase()
         })
       } catch (err) {
         console.log(err)
